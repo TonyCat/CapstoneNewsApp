@@ -21,6 +21,13 @@ class MainActivity : AppCompatActivity() {
 
     )
 
+    private val authenticationHeaders = mapOf(
+        "API_KEY" to "sdfvwefrgvqw3ervwervwervwefv",
+        "Authorization" to "auth token",
+        "content/type" to "application/json"
+    )
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -30,6 +37,9 @@ class MainActivity : AppCompatActivity() {
         val mainGroup = binding.mainGroup
 
         var count = 0
+
+
+        println("Fetching data with API KEY ${fetchData()}")
 
         for(screenControl in mainGroup.children)
         {
@@ -54,7 +64,7 @@ class MainActivity : AppCompatActivity() {
 
                 ///show ui on the screen
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                    screenControl.setText(Html.fromHtml(ui,Html.FROM_HTML_MODE_LEGACY));
+                    screenControl.text = Html.fromHtml(ui,Html.FROM_HTML_MODE_LEGACY)
                 } else {
                    screenControl.text = ui
                }
@@ -71,10 +81,8 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    fun generateUI(id:String? ,author:String?,title:String?, readBy:Int = 0): String {
-        var displayString: String = ""
-
-        displayString = "<h3>$title </h3>"
+    private fun generateUI(id:String?, author:String?, title:String?, readBy:Int = 0): String {
+        var displayString = "<h3>$title </h3>"
 
         if(id != null) {
             displayString += "<b>$id </b> "
@@ -92,6 +100,14 @@ class MainActivity : AppCompatActivity() {
 
         return displayString
 
+    }
+
+
+    private fun fetchData(): String? {
+        for (value in authenticationHeaders.values) {
+            println(value)
+        }
+        return authenticationHeaders["API_KEY"]
     }
 
 

@@ -12,7 +12,7 @@
 
 ##Nice to have (for an Above and Beyond grade)
 -[x] Use default values with functions
--[] Use maps to store hardcoded data instead of ArrayList
+-[x] Use maps to store hardcoded data instead of ArrayList
 
 
 ## Extra
