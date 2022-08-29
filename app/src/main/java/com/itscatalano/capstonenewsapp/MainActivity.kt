@@ -86,11 +86,11 @@ class MainActivity : AppCompatActivity() {
         var displayString = "<h3>$title </h3>"
 
         if(sourceName != null) {
-            displayString  += "<b>$sourceName </b> <br> "
+            displayString  += "<b>$sourceName </b>  <br> "
         }
 
         if (author != null){
-            displayString += "<i>Written by: $author </i> <br>  "
+            displayString += "<i>Written by: $author </i>  "
         }
 
 
