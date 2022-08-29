@@ -15,4 +15,4 @@
 - [x] Use maps to store hardcoded data instead of ArrayList
 
 
-
+Week 2 ready for review
