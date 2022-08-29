@@ -10,9 +10,9 @@
 - [x] Null checks are done using if/else statements
 - [x] Code is divided into multiple functions instead of doing everything in onCreate(). At least one new function should be created.
 
-##Nice to have (for an Above and Beyond grade)
--[x] Use default values with functions
--[x] Use maps to store hardcoded data instead of ArrayList
+## Nice to have (for an Above and Beyond grade)
+- [x] Use default values with functions
+- [x] Use maps to store hardcoded data instead of ArrayList
 
 
-## Extra
+
