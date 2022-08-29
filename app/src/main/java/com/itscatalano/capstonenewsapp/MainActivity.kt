@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
             if(screenControl is TextView)
             {
                 val title = article[count].title
-                val id = article[count].source.id
+                //val id = article[count].source.id
                 val sourceName = article[count].source.name
                 val author = article[count].author
 
