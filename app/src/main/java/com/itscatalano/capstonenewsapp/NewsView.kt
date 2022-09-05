@@ -18,6 +18,7 @@ class NewsView @JvmOverloads constructor (
             fun setData(article: Article){
                 binding.titleTextView.text = article.title
                 binding.authorTextView.text = article.author
+             //   binding.sourceDescriptionTextView.text = article.source.description
             }
 
         }

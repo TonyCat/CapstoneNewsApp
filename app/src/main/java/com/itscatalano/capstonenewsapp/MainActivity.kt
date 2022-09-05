@@ -32,13 +32,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
-
         binding = ActivityMainBinding.inflate(layoutInflater)
-        // set content view after binding
-      //  val view = binding.root
+
         setContentView(binding.root)
-      //  val mainGroup = binding.mainGroup
+
 
         var count = 0
 
@@ -53,7 +50,7 @@ class MainActivity : AppCompatActivity() {
             binding.mainGroup.addView(news)
 
 
-            println(article.title)
+            println(article)
         }
 
 
