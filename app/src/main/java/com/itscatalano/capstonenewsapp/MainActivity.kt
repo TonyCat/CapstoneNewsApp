@@ -31,6 +31,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         // set content view after binding
       //  val view = binding.root
@@ -41,9 +44,19 @@ class MainActivity : AppCompatActivity() {
 
         var allArticles = NewsService().getAllArticles()
 
+        println("Looping around articles")
         allArticles.forEach { article ->
-            println(article)
+
+            val news = NewsView(this)
+                news.setData(article)
+
+            binding.mainGroup.addView(news)
+
+
+            println(article.title)
         }
+
+
 
 
 
