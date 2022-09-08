@@ -66,7 +66,8 @@ class MainActivity : AppCompatActivity() {
             if(screenControl is TextView)
             {
                 val title = article[count].title
-                val id = article[count].source.id
+                //val id = article[count].source.id
+                val sourceName = article[count].source.name
                 val author = article[count].author
 
 
@@ -76,9 +77,9 @@ class MainActivity : AppCompatActivity() {
    */
                 //call function to build the ui..if the article is divisable by 2 then generate a random number for how many people read it
                 val ui = if (count%2 == 0 ){
-                    generateUI(id, author,title, Random.nextInt(0, 100))
+                    generateUI(sourceName, author,title, Random.nextInt(0, 100))
                 }else{
-                    generateUI(id, author,title)
+                    generateUI(sourceName, author,title)
                 }
 
 
@@ -101,11 +102,11 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun generateUI(id:String?, author:String?, title:String?, readBy:Int = 0): String {
+    private fun generateUI(sourceName:String?, author:String?, title:String?, readBy: Int = 0): String {
         var displayString = "<h3>$title </h3>"
 
-        if(id != null) {
-            displayString += "<b>$id </b> "
+        if(sourceName != null) {
+            displayString  += "<b>$sourceName </b>  <br> "
         }
 
         if (author != null){

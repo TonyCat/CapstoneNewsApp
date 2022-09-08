@@ -36,4 +36,4 @@ Note: Not enough time to complete Nice to have due to Holiday weekend
 - [x] Use maps to store hardcoded data instead of ArrayList
 
 
-
+Week 2 ready for review
