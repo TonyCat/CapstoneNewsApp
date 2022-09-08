@@ -7,4 +7,4 @@ package com.itscatalano.capstonenewsapp
  * and push the results of the articles in a a list of Article
  *
  */
-data class APIresult(val articles: List<Article>, val status: String, val totalResults: Int)
+data class APIresponse(val articles: List<Article>, val status: String, val totalResults: Int)
