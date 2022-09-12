@@ -1,16 +1,29 @@
 package com.itscatalano.capstonenewsapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
 import android.widget.TextView
 import androidx.core.view.children
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.itscatalano.capstonenewsapp.databinding.ActivityMainBinding
 import kotlin.random.Random
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+
+    private lateinit var newsRecyclerView: RecyclerView
+
+
+  // private val newsDataManager = NewsDataManager(this)
+
+    companion object {
+        const val LIST_DETAIL_REQUEST_CODE = 123
+        const val INTENT_LIST_KEY = "key"
+    }
 
 
 //    private val article = arrayListOf(
@@ -41,6 +54,27 @@ class MainActivity : AppCompatActivity() {
 
         var allArticles = NewsService().getAllArticles()
 
+
+     //   val lists =  NewsDataManager.readNews()
+
+        /*
+        newsRecyclerView = findViewById(R.id.news_recycler_view)
+        newsRecyclerView.layoutManager = LinearLayoutManager(this)
+
+        newsRecyclerView.adapter = NewsRecyclerAdapter(allArticles)
+*/
+
+
+
+        binding.newsRecyclerView.run {
+            adapter = NewsRecyclerAdapter(allArticles)
+        }
+
+
+
+
+
+        /*
         println("Looping around articles")
         allArticles.forEach { article ->
 
@@ -52,7 +86,7 @@ class MainActivity : AppCompatActivity() {
 
             println(article)
         }
-
+*/
 
 
 
@@ -100,6 +134,30 @@ class MainActivity : AppCompatActivity() {
 */
     }
 
+/*
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+
+        if (requestCode == LIST_DETAIL_REQUEST_CODE){
+            data?.let{
+
+
+                val list = data.getParcelableExtra<NewsList>(INTENT_LIST_KEY)!!
+                newsDataManager.saveNews(list)
+                updateNews()
+            }
+        }
+
+
+    }
+
+
+    private fun updateNews() {
+        val news =  newsDataManager.readNews()
+        newsRecyclerView.adapter = NewsRecyclerAdapter(news)
+    }
+*/
 
     private fun generateUI(id:String?, author:String?, title:String?, readBy:Int = 0): String {
         var displayString = "<h3>$title </h3>"
