@@ -2,6 +2,22 @@
 # Anthony Catalano NYSOITS
 
 
+
+# Week 4
+Need to have:
+- [x] An item row layout file
+- [x] Use of RecyclerView to display the news data
+- [x] Display news details in a separate screen
+- [x] Clicking on a news article should take users to the details screen 
+- [x] Use of SharedPreferences to persist the news data for offline use
+
+Nice to have:
+- [] Swipe to delete an item from the displayed ArrayList in Recyclerview
+- [] Use of Jetpack Navigation
+- [] Single activity with multiple fragments
+- [] Refined UI design (Bolder news heading, lighter description font styles, use of CardView, appropriate padding, margins–you’re free to use your creativity here)
+Need seperate session to go over how to use fragments since the way in the video is differant than the way they are created in Chipmunk. Alot of heavy content to finish the need to have there was no time for the nice to have.
+
 # Week 3
 Need to have:
 - [x] Switch following Source properties to use enum classes:
