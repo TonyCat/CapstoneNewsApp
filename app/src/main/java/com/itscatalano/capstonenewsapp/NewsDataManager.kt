@@ -1,31 +1,37 @@
-/*package com.itscatalano.capstonenewsapp
+package com.itscatalano.capstonenewsapp
 
 import android.content.Context
 import android.preference.PreferenceManager
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
 
 class NewsDataManager (private val context: Context){
 
-    fun saveNews(list: NewsList){
+    fun saveNews(list:List<Article>){
         val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context)
+        val gson = Gson()
 
-        sharedPrefs.edit().putStringSet(list.name,list.news.toHashSet()).commit()
+        sharedPrefs.edit().putString("storeAllarticles",gson.toJson(list)).commit()
+
 
 
     }
 
-    fun readNews(): ArrayList<Article>{
+    fun readNews(): List<Article>{
         val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context)
 
-        val contents = sharedPrefs.all
-        val newsLists = ArrayList<NewsList>()
+        val storedArticles = sharedPrefs.getString("storeAllarticles", "")
 
-        for (taskList in contents){
-            val newsItems = ArrayList(taskList.value as HashSet<String>)
-            val list = NewsList(taskList.key,newsItems)
-            newsLists.add(list)
+        if (storedArticles.isNullOrEmpty() ){
+            return emptyList()
         }
 
-        return newsLists
+        val gson = Gson()
+
+        return gson.fromJson(storedArticles, object : TypeToken<List<Article>>() {}.type)
+
+
+
     }
-}*/
+}

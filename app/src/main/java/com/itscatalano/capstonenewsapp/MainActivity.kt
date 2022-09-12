@@ -55,6 +55,21 @@ class MainActivity : AppCompatActivity() {
         var allArticles = NewsService().getAllArticles()
 
 
+        //first check to see if there is anydata stored in the newsDataManager with readNews
+       val newsDataManager = NewsDataManager(this)
+
+        var newsFromMemory = newsDataManager.readNews()
+
+        if (newsFromMemory.isEmpty()){
+            newsDataManager.saveNews(allArticles)
+            newsFromMemory = newsDataManager.readNews()
+        }
+
+
+
+        //if the
+
+
      //   val lists =  NewsDataManager.readNews()
 
         /*
@@ -67,7 +82,11 @@ class MainActivity : AppCompatActivity() {
 
 
         binding.newsRecyclerView.run {
-            adapter = NewsRecyclerAdapter(allArticles)
+            adapter = NewsRecyclerAdapter(newsFromMemory){ articleIndex ->
+                val newsDetailIntent = Intent(this@MainActivity,NewsDetailActivity::class.java)
+                newsDetailIntent.putExtra("article",newsFromMemory[articleIndex])
+                startActivity(newsDetailIntent)
+            }
         }
 
 
@@ -94,6 +113,8 @@ class MainActivity : AppCompatActivity() {
 
 
         println("Fetching data with API KEY ${fetchData()}")
+
+
 /*
         for(screenControl in mainGroup.children)
         {

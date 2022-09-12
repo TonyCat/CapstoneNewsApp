@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class NewsRecyclerAdapter (
 newsList : List<Article>,
+private val onArticleTap: (Int) -> Unit
 ) :RecyclerView.Adapter<NewsViewHolder>(){
 
     private val news = newsList.toMutableList()
@@ -23,11 +24,11 @@ newsList : List<Article>,
     }
 
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
-       /*holder.bindData(news[position]){
-           remove
-       }*/
 
-        holder.bindData(news[position])
+
+        holder.bindData(news[position]){
+            onArticleTap(position)
+        }
 
 
     }

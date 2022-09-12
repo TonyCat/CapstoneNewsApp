@@ -7,8 +7,12 @@ class NewsViewHolder (
 ): RecyclerView.ViewHolder(newsView){
 
 
-    fun bindData(article:Article){
+    fun bindData(article:Article, onTap: () -> Unit  ){
         newsView.setData(article)
+
+        newsView.setOnClickListener{
+            onTap()
+        }
     }
 
 }
