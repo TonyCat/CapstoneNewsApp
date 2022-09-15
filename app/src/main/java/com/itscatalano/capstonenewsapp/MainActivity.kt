@@ -3,13 +3,9 @@ package com.itscatalano.capstonenewsapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Html
-import android.widget.TextView
-import androidx.core.view.children
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.itscatalano.capstonenewsapp.databinding.ActivityMainBinding
-import kotlin.random.Random
+import com.itscatalano.capstonenewsapp.views.NewsDetailActivity
 
 
 class MainActivity : AppCompatActivity() {
@@ -83,7 +79,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.newsRecyclerView.run {
             adapter = NewsRecyclerAdapter(newsFromMemory){ articleIndex ->
-                val newsDetailIntent = Intent(this@MainActivity,NewsDetailActivity::class.java)
+                val newsDetailIntent = Intent(this@MainActivity, NewsDetailActivity::class.java)
                 newsDetailIntent.putExtra("article",newsFromMemory[articleIndex])
                 startActivity(newsDetailIntent)
             }

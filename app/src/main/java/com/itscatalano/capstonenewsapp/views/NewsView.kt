@@ -1,10 +1,11 @@
-package com.itscatalano.capstonenewsapp
+package com.itscatalano.capstonenewsapp.views
 
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.itscatalano.capstonenewsapp.databinding.NewsServiceLayoutBinding
+import com.itscatalano.capstonenewsapp.models.Article
 
 class NewsView @JvmOverloads constructor (
     context: Context,

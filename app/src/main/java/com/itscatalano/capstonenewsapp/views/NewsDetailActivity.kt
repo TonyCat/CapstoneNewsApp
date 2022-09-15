@@ -1,9 +1,9 @@
-package com.itscatalano.capstonenewsapp
+package com.itscatalano.capstonenewsapp.views
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.itscatalano.capstonenewsapp.databinding.ActivityMainBinding
 import com.itscatalano.capstonenewsapp.databinding.ActivityNewsDetailBinding
+import com.itscatalano.capstonenewsapp.models.Article
 
 class NewsDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,4 +1,4 @@
-package com.itscatalano.capstonenewsapp
+package com.itscatalano.capstonenewsapp.models
 
 enum class CountryType {
     ae,
