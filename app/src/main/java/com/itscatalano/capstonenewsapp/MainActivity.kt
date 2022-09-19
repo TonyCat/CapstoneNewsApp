@@ -1,10 +1,13 @@
 package com.itscatalano.capstonenewsapp
 
 import android.content.Intent
+import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.RecyclerView
 import com.itscatalano.capstonenewsapp.databinding.ActivityMainBinding
+import com.itscatalano.capstonenewsapp.networking.NetworkStatusChecker
+import com.itscatalano.capstonenewsapp.request.NewsDataRequest
 import com.itscatalano.capstonenewsapp.views.NewsDetailActivity
 
 
@@ -13,6 +16,13 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var newsRecyclerView: RecyclerView
 
+
+    private val remoteApi = App.remoteApi
+
+  /*  private val networkStatusChecker by lazy {
+        NetworkStatusChecker(getSystemService(ConnectivityManager::class.java))
+    }
+*/
 
   // private val newsDataManager = NewsDataManager(this)
 
@@ -63,17 +73,10 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        //if the
 
-
-     //   val lists =  NewsDataManager.readNews()
-
-        /*
-        newsRecyclerView = findViewById(R.id.news_recycler_view)
-        newsRecyclerView.layoutManager = LinearLayoutManager(this)
-
-        newsRecyclerView.adapter = NewsRecyclerAdapter(allArticles)
-*/
+       remoteApi.getNews {
+           print("called getNews")
+       }
 
 
 
@@ -175,6 +178,20 @@ class MainActivity : AppCompatActivity() {
         newsRecyclerView.adapter = NewsRecyclerAdapter(news)
     }
 */
+
+    private fun logUserIn(newsDataRequest: NewsDataRequest) {
+
+        remoteApi.getNews {  }
+
+//        networkStatusChecker.performIfConnectedToInternet {
+//
+//            remoteApi.getNews {
+//
+//            }
+//
+//        }
+    }
+
 
     private fun generateUI(id:String?, author:String?, title:String?, readBy:Int = 0): String {
         var displayString = "<h3>$title </h3>"
