@@ -1,5 +1,6 @@
-package com.itscatalano.capstonenewsapp.models
+package com.itscatalano.capstonenewsapp.models.response
 
+import com.itscatalano.capstonenewsapp.models.Article
 import com.squareup.moshi.Json
 
 /***
@@ -9,7 +10,7 @@ import com.squareup.moshi.Json
  * and push the results of the articles in a a list of Article
  *
  */
-//data class APIresponse(val articles: List<Article>, val status: String, val totalResults: Int)
+
 class APIresponse(
     @field:Json(name = "articles") val articles: List<Article>,
     @field:Json(name = "status") val status: String?,

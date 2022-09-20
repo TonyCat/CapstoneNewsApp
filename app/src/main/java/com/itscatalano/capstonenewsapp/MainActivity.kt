@@ -1,12 +1,10 @@
 package com.itscatalano.capstonenewsapp
 
 import android.content.Intent
-import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.RecyclerView
 import com.itscatalano.capstonenewsapp.databinding.ActivityMainBinding
-import com.itscatalano.capstonenewsapp.networking.NetworkStatusChecker
 import com.itscatalano.capstonenewsapp.request.NewsDataRequest
 import com.itscatalano.capstonenewsapp.views.NewsDetailActivity
 
@@ -58,6 +56,9 @@ class MainActivity : AppCompatActivity() {
 
         var count = 0
 
+
+
+        /*
         var allArticles = NewsService().getAllArticles()
 
 
@@ -70,23 +71,33 @@ class MainActivity : AppCompatActivity() {
             newsDataManager.saveNews(allArticles)
             newsFromMemory = newsDataManager.readNews()
         }
+*/
 
 
 
+       remoteApi.getNews{ articles , error ->
+     //      binding.newsRecyclerView.run {   ///if you needed to do multiple things on the
 
-       remoteApi.getNews {
-           print("called getNews")
+           if (error != null){
+              println("My error is $error.message")
+           }else{
+               binding.newsRecyclerView.adapter = NewsRecyclerAdapter(articles){ articleIndex ->
+                   val newsDetailIntent = Intent(this@MainActivity, NewsDetailActivity::class.java)
+                   newsDetailIntent.putExtra("article",articles[articleIndex])
+                   startActivity(newsDetailIntent)
+           }
+
+
+
+       //        }
+
+
+           }
+
        }
 
 
 
-        binding.newsRecyclerView.run {
-            adapter = NewsRecyclerAdapter(newsFromMemory){ articleIndex ->
-                val newsDetailIntent = Intent(this@MainActivity, NewsDetailActivity::class.java)
-                newsDetailIntent.putExtra("article",newsFromMemory[articleIndex])
-                startActivity(newsDetailIntent)
-            }
-        }
 
 
 
@@ -179,18 +190,6 @@ class MainActivity : AppCompatActivity() {
     }
 */
 
-    private fun logUserIn(newsDataRequest: NewsDataRequest) {
-
-        remoteApi.getNews {  }
-
-//        networkStatusChecker.performIfConnectedToInternet {
-//
-//            remoteApi.getNews {
-//
-//            }
-//
-//        }
-    }
 
 
     private fun generateUI(id:String?, author:String?, title:String?, readBy:Int = 0): String {
