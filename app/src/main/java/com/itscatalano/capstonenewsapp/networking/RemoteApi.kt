@@ -20,7 +20,7 @@ class RemoteApi(private val apiService: RemoteApiService) {
     fun getNews(onNewsRecieved: ( List<Article>,  Throwable?)  -> Unit) {
 
 
-        apiService.getNews("Apple", "2022-08-26", "popularity", "2f8cd5e3444b4e96bc6353df491c8d51" ).enqueue(object : Callback<APIresponse> {
+        apiService.getNews("Apple", "2022-9-01", "popularity", "2f8cd5e3444b4e96bc6353df491c8d51" ).enqueue(object : Callback<APIresponse> {
             override fun onFailure(call: Call<APIresponse>, error: Throwable) {
 
             print("*********************** CALL FAILED")
@@ -44,7 +44,13 @@ class RemoteApi(private val apiService: RemoteApiService) {
 
                 println ("There are ${response.body()!!.articles.size} articles")
 
-                onNewsRecieved(response.body()!!.articles,null)
+                if (response.code() == 200){
+                    onNewsRecieved(response.body()!!.articles,null)
+                }else{
+                   print("It was not a 200 so do nothing")
+                }
+
+
 
             }
 

@@ -15,10 +15,10 @@ class NewsDetailActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-
         val article =  intent.extras?.getParcelable<Article>("article")
 
         if (article != null) {
+
             binding.txtDescription.text = article.description
         }
 

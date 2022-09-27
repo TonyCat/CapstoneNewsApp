@@ -5,7 +5,12 @@
     android:layout_height="match_parent"
     >
 
-
+    <ImageView
+        android:id="@+id/newsImage"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <TextView
@@ -13,6 +18,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/titleTextView"
         android:textSize = "24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newsImage"
 
         />
 
@@ -38,7 +46,7 @@
 
     <Space
         android:layout_width="0dp"
-        android:layout_height="75dp"
+        android:layout_height="15dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/authorTextView" />

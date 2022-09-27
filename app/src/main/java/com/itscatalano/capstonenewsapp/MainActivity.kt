@@ -1,14 +1,21 @@
 package com.itscatalano.capstonenewsapp
 
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
 import com.itscatalano.capstonenewsapp.databinding.ActivityMainBinding
 import com.itscatalano.capstonenewsapp.networking.NetworkStatusChecker
 import com.itscatalano.capstonenewsapp.request.NewsDataRequest
 import com.itscatalano.capstonenewsapp.views.NewsDetailActivity
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import java.net.HttpURLConnection
+import java.net.URL
 
 
 class MainActivity : AppCompatActivity() {
@@ -30,7 +37,6 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
     private val authenticationHeaders = mapOf(
         "API_KEY" to "sdfvwefrgvqw3ervwervwervwefv",
         "Authorization" to "auth token",
@@ -47,33 +53,36 @@ class MainActivity : AppCompatActivity() {
 
 
 
+
+
         networkStatusChecker.performIfConnectedToInternet {
             remoteApi.getNews { articles, error ->
-                //      binding.newsRecyclerView.run {   ///if you needed to do multiple things on the recycler view
+               // binding.newsRecyclerView.run {   ///if you needed to do multiple things on the recycler view
 
-                if (error != null) {
-                    println("My error is $error.message")
-                } else {
-                    binding.newsRecyclerView.adapter =
-                        NewsRecyclerAdapter(articles) { articleIndex ->
-                            val newsDetailIntent =
-                                Intent(this@MainActivity, NewsDetailActivity::class.java)
-                            newsDetailIntent.putExtra("article", articles[articleIndex])
-                            startActivity(newsDetailIntent)
-                        }
+                    if (error != null) {
+                        println("My error is $error.message")
+                    } else {
 
 
-                    //        }
+                                binding.newsRecyclerView.adapter =
+                                    NewsRecyclerAdapter(articles) { articleIndex ->
+                                        val newsDetailIntent =
+                                            Intent(
+                                                this@MainActivity,
+                                                NewsDetailActivity::class.java
+                                            )
+                                        newsDetailIntent.putExtra("article", articles[articleIndex])
+                                        startActivity(newsDetailIntent)
 
 
-                }
+                                    }
 
+
+
+                    }
+              //  }
             }
         }
-
-
-
-
 
 
     }
@@ -86,7 +95,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    }
+}
 
 
 
