@@ -1,6 +1,68 @@
 # CapstoneNewsApp
 # Anthony Catalano NYSOITS
 
+# Week 7
+ Need to have:
+- [x]  A Details screen that adds some sort of filter to the image
+- [x]  Proper use of WorkManager
+- [x]  Use of input data
+- [x]  Handling different states of WorkManager 
+- [x]  Proper use of constraints (Only apply the filter if battery is not low) 
+- [x]  Adding 3 constraints to the Worker
+
+
+Nice to have:
+- [x]  Saving the file using FileOutputStream
+- [x]  Apply more than one worker to the WorkManager
+- [ ] You could add multiple image filter types (perhaps a blurry image filter and a sepia filter)
+- [x]  You could also wrap the article fetching logic (retrofit call to the API) behind a worker!
+- [ ] Or, come up with your own set of work to wrap behind a Worker!
+
+
+# Week 6
+Need to have:
+- [x]  Retrofit with coroutines is used for the networking layer
+- [x]  Appropriate scope is used for each coroutine
+- [x]  Handle coroutine exceptions
+- [x] All network requests are done on a background thread
+
+Nice to have:
+- [ ] Handle UI responsively when making network requests, e.g. show loading indicator until response returns
+- [ ] Implement Repository (just for API layer - there is no local database yet)
+- [ ] Proper use of MutableLiveData and LiveData with proper encapsulation
+
+
+# Week 5
+Need to have:
+- [x] News articles are fetched from News API instead of hardcoded data
+- [x] Proper parsing of JSON data is done
+- [x] Error handling - All exceptions/errors are handled gracefully (Network exception) by showing error messages 
+- [x] Internet check before making network calls
+- [ ] Refresh button functionality to get the latest news data
+Never went over how to create menu buttons. Articles researched dont work with page setup
+
+Nice to have:
+- [] Using Result/sealed classes for different error states (Loading, Success, Failure)
+- [] Making custom screens/dialogs for different error states 
+- [] Use of logging interceptor to analyze each network request
+- [] Using Glide to load images
+
+
+# Week 4
+Need to have:
+- [x] An item row layout file
+- [x] Use of RecyclerView to display the news data
+- [x] Display news details in a separate screen
+- [x] Clicking on a news article should take users to the details screen 
+
+Nice to have:
+- [] Swipe to delete an item from the displayed ArrayList in Recyclerview
+- [] Use of Jetpack Navigation
+- [] Single activity with multiple fragments
+- [x] Refined UI design (Bolder news heading, lighter description font styles, use of CardView, appropriate padding, margins–you’re free to use your creativity here)
+- [x] Use of SharedPreferences to persist the news data for offline use
+
+
 
 # Week 3
 Need to have:
