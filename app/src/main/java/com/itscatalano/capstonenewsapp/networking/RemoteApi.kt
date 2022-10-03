@@ -15,6 +15,9 @@ const val BASE_URL = "https://newsapi.org/"
 
 class RemoteApi(private val apiService: RemoteApiService) {
 
+    suspend fun getNewsSuspend() : Response<APIresponse>{
+       return apiService.getNewsSuspend("Apple", "2022-9-05", "popularity", "2f8cd5e3444b4e96bc6353df491c8d51" )
+    }
 
 
     fun getNews(onNewsRecieved: ( List<Article>,  Throwable?)  -> Unit) {

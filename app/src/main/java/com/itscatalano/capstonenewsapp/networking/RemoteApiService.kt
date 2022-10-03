@@ -3,6 +3,7 @@ package com.itscatalano.capstonenewsapp.networking
 import com.itscatalano.capstonenewsapp.models.APIresponse
 import com.itscatalano.capstonenewsapp.request.NewsDataRequest
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.*
 
 interface RemoteApiService {
@@ -14,6 +15,14 @@ interface RemoteApiService {
                        @Query("sortBy") sortByParam: String ,
                        @Query("apiKey") apiKeyParam: String ,
     ): Call<APIresponse>
+
+    @GET("v2/everything")
+   suspend fun getNewsSuspend(@Query("q") qParam: String,
+                       @Query("from") fromParam: String ,
+                       @Query("sortBy") sortByParam: String ,
+                       @Query("apiKey") apiKeyParam: String ,
+    ): Response<APIresponse>
+
 
 //fun getNews(@Query("q") String Qparam ): Call<NewsDataRequest>
 

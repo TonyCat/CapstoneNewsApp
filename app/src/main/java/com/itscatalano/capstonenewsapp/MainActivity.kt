@@ -6,12 +6,15 @@ import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.itscatalano.capstonenewsapp.databinding.ActivityMainBinding
 import com.itscatalano.capstonenewsapp.networking.NetworkStatusChecker
+import com.itscatalano.capstonenewsapp.networking.RemoteApiService
 import com.itscatalano.capstonenewsapp.request.NewsDataRequest
 import com.itscatalano.capstonenewsapp.views.NewsDetailActivity
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.net.HttpURLConnection
@@ -52,7 +55,27 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
+lifecycleScope.launch(IO){
+    val response = remoteApi.getNewsSuspend()
 
+    if (response.isSuccessful){
+
+        binding.newsRecyclerView.adapter =
+            response.body()?.let {
+                NewsRecyclerAdapter(it.articles) { articleIndex ->
+                    val newsDetailIntent =
+                        Intent(
+                            this@MainActivity,
+                            NewsDetailActivity::class.java
+                        )
+                    newsDetailIntent.putExtra("article", response.body()!!.articles[articleIndex])
+                    startActivity(newsDetailIntent)
+
+
+                }
+            }
+    }
+}
 
 
         networkStatusChecker.performIfConnectedToInternet {
