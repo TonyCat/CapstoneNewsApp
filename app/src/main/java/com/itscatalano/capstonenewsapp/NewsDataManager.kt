@@ -4,6 +4,7 @@ import android.content.Context
 import android.preference.PreferenceManager
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.itscatalano.capstonenewsapp.models.Article
 
 
 class NewsDataManager (private val context: Context){

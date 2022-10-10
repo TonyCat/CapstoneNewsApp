@@ -2,10 +2,13 @@ package com.itscatalano.capstonenewsapp
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.itscatalano.capstonenewsapp.models.Article
+import com.itscatalano.capstonenewsapp.views.NewsView
+import com.itscatalano.capstonenewsapp.views.NewsViewHolder
 
 class NewsRecyclerAdapter (
-newsList : List<Article>,
-private val onArticleTap: (Int) -> Unit
+    newsList : List<Article>,
+    private val onArticleTap: (Int) -> Unit
 ) :RecyclerView.Adapter<NewsViewHolder>(){
 
     private val news = newsList.toMutableList()

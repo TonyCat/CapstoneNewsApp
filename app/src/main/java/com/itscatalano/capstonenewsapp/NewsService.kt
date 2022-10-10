@@ -1,6 +1,6 @@
 package com.itscatalano.capstonenewsapp
 
-import android.os.Bundle
+import com.itscatalano.capstonenewsapp.models.*
 
 class NewsService {
 

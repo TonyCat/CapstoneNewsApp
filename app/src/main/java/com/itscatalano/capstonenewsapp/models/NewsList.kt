@@ -1,5 +1,5 @@
 
-package com.itscatalano.capstonenewsapp
+package com.itscatalano.capstonenewsapp.models
 
 
 import android.os.Parcelable
