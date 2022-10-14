@@ -13,22 +13,25 @@ import retrofit2.Response
 
 const val BASE_URL = "https://newsapi.org/"
 
+
+
+
 class RemoteApi(private val apiService: RemoteApiService) {
 
     suspend fun getNewsSuspend() : Response<APIresponse>{
-       return apiService.getNewsSuspend("Apple", "2022-9-05", "popularity", "2f8cd5e3444b4e96bc6353df491c8d51" )
+        return apiService.getNewsSuspend("Apple", "2022-10-05", "popularity", "2f8cd5e3444b4e96bc6353df491c8d51" )
     }
 
 
     fun getNews(onNewsRecieved: ( List<Article>,  Throwable?)  -> Unit) {
 
 
-        apiService.getNews("Apple", "2022-9-05", "popularity", "2f8cd5e3444b4e96bc6353df491c8d51" ).enqueue(object : Callback<APIresponse> {
+        apiService.getNews("Apple", "2022-10-05", "popularity", "2f8cd5e3444b4e96bc6353df491c8d51" ).enqueue(object : Callback<APIresponse> {
             override fun onFailure(call: Call<APIresponse>, error: Throwable) {
 
-            print("*********************** CALL FAILED")
+                print("*********************** CALL FAILED")
 
-             onNewsRecieved(emptyList(), error)
+                onNewsRecieved(emptyList(), error)
             }
 
 
@@ -50,7 +53,7 @@ class RemoteApi(private val apiService: RemoteApiService) {
                 if (response.code() == 200){
                     onNewsRecieved(response.body()!!.articles,null)
                 }else{
-                   print("It was not a 200 so do nothing")
+                    print("It was not a 200 so do nothing")
                 }
 
 
@@ -60,6 +63,6 @@ class RemoteApi(private val apiService: RemoteApiService) {
         })
 
 
-}
+    }
 
 }

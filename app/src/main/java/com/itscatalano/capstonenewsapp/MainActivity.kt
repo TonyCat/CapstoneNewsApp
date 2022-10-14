@@ -8,8 +8,10 @@ import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
+import com.itscatalano.capstonenewsapp.App.Companion.articleRepo
 import com.itscatalano.capstonenewsapp.databinding.ActivityMainBinding
 import com.itscatalano.capstonenewsapp.networking.NetworkStatusChecker
+import com.itscatalano.capstonenewsapp.networking.NewsApiService
 import com.itscatalano.capstonenewsapp.networking.RemoteApiService
 import com.itscatalano.capstonenewsapp.request.NewsDataRequest
 import com.itscatalano.capstonenewsapp.views.NewsDetailActivity
@@ -19,7 +21,8 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.net.HttpURLConnection
 import java.net.URL
-
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.onEach
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -53,6 +56,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
+
+
+
 
 
 lifecycleScope.launch(IO){
