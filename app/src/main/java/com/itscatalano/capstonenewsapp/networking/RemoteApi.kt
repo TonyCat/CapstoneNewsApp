@@ -21,11 +21,11 @@ class RemoteApi(private val apiService: RemoteApiService) {
                 CustomResult.Success(data.articles)
             } else {
 
-               CustomResult.Failure(Throwable("Failed to get article"))
+               CustomResult.Failure("Failed to get article")
             }
 
         } catch (e: Exception) {
-            CustomResult.Failure(e)
+            CustomResult.Failure("errror is ${e.toString()}")
         }
     }
 }

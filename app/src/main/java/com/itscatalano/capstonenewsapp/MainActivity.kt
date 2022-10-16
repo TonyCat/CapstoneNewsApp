@@ -39,6 +39,20 @@ class MainActivity : AppCompatActivity() {
         MainActivityViewModel.Factory()
     }
 
+   // private val viewModel: MainActivityViewModel by viewModels { MainActivityViewModel.Factory }
+
+//    private val viewsModel by viewModels<NewsListViewModel> {
+//        NewsListViewModel.Factory(
+//            newsRepo = App.newsRepository
+//        )
+//    }
+
+    private val viewsModel by viewModels<NewsListViewModel> {
+        NewsListViewModel.Factory(
+            newsRepo = App.newsRepository
+        )
+    }
+
     private val articleAdapter =
         NewsRecyclerAdapter{ article ->
             val newsDetailIntent = Intent(this@MainActivity, NewsDetailActivity::class.java)
@@ -46,11 +60,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(newsDetailIntent)
         }
 
-    private val viewsModel by viewModels<NewsListViewModel> {
-        NewsListViewModel.Factory(
-            newsRepo = App.newsRepository
-        )
-    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,6 +91,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 return true
             }
+
         }
 
         binding.searchView.setOnQueryTextListener(queryTextListener)

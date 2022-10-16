@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.itscatalano.capstonenewsapp"
-        minSdk 33
+        minSdk 28
         targetSdk 33
         versionCode 1
         versionName "1.0"
@@ -33,7 +33,17 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+        freeCompilerArgs = ['-Xjvm-default=compatibility']
     }
+
+    sourceSets {
+        main {
+            res {
+                srcDirs 'src/main/res', 'src/main/res/menu'
+            }
+        }
+    }
+
 }
 
 dependencies {
@@ -43,7 +53,10 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'com.google.firebase:firebase-firestore-ktx:24.3.1'
+
+   // implementation 'com.google.firebase:firebase-firestore-ktx:24.3.1'
+
+
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
     implementation 'androidx.work:work-runtime-ktx:2.7.1'
     implementation 'androidx.room:room-common:2.4.3'
@@ -70,4 +83,9 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.9.1'
     implementation 'androidx.activity:activity-ktx:1.6.0'
     implementation 'androidx.datastore:datastore-preferences:1.0.0'
+
+    implementation 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha02'
+    kapt 'androidx.hilt:hilt-compiler:1.0.0-alpha02'
+
+
 }
