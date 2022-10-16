@@ -6,10 +6,8 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.itscatalano.capstonenewsapp.dao.ArticleDao
+import com.itscatalano.capstonenewsapp.dao.ArticleSourceDao
 import com.itscatalano.capstonenewsapp.dao.SourceDao
-import com.itscatalano.capstonenewsapp.database.converters.CategoryConverter
-import com.itscatalano.capstonenewsapp.database.converters.CountryConverter
-import com.itscatalano.capstonenewsapp.database.converters.LanguageConverter
 import com.itscatalano.capstonenewsapp.database.converters.SourceConverter
 import com.itscatalano.capstonenewsapp.models.Article
 import com.itscatalano.capstonenewsapp.models.Source
@@ -40,6 +38,8 @@ abstract class NewsDatabase : RoomDatabase() {
 
     }
     abstract fun articleDao(): ArticleDao
+
+    abstract fun articleSourceDao(): ArticleSourceDao
 
     abstract fun sourceDao(): SourceDao
 }

@@ -6,14 +6,20 @@ import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.SearchView
+import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
-import com.itscatalano.capstonenewsapp.App.Companion.articleRepo
+import com.itscatalano.capstonenewsapp.App.Companion.newsRepository
 import com.itscatalano.capstonenewsapp.databinding.ActivityMainBinding
 import com.itscatalano.capstonenewsapp.networking.NetworkStatusChecker
 import com.itscatalano.capstonenewsapp.networking.NewsApiService
 import com.itscatalano.capstonenewsapp.networking.RemoteApiService
 import com.itscatalano.capstonenewsapp.request.NewsDataRequest
+import com.itscatalano.capstonenewsapp.utils.CustomResult
+import com.itscatalano.capstonenewsapp.viewmodels.MainActivityViewModel
+import com.itscatalano.capstonenewsapp.viewmodels.NewsListViewModel
 import com.itscatalano.capstonenewsapp.views.NewsDetailActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.IO
@@ -29,26 +35,22 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var newsRecyclerView: RecyclerView
 
-
-    private val remoteApi = App.remoteApi
-
-    private val networkStatusChecker by lazy {
-        NetworkStatusChecker(getSystemService(ConnectivityManager::class.java))
+    private val viewModel: MainActivityViewModel by viewModels {
+        MainActivityViewModel.Factory()
     }
 
+    private val articleAdapter =
+        NewsRecyclerAdapter{ article ->
+            val newsDetailIntent = Intent(this@MainActivity, NewsDetailActivity::class.java)
+            newsDetailIntent.putExtra(INTENT_EXTRA_ARTICLE, article)
+            startActivity(newsDetailIntent)
+        }
 
-    companion object {
-        const val LIST_DETAIL_REQUEST_CODE = 123
-        const val INTENT_LIST_KEY = "key"
+    private val viewsModel by viewModels<NewsListViewModel> {
+        NewsListViewModel.Factory(
+            newsRepo = App.newsRepository
+        )
     }
-
-
-    private val authenticationHeaders = mapOf(
-        "API_KEY" to "sdfvwefrgvqw3ervwervwervwefv",
-        "Authorization" to "auth token",
-        "content/type" to "application/json"
-    )
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,71 +60,65 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
+        super.onCreate(savedInstanceState)
+
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        binding.articleRecyclerView.run {
+            adapter = articleAdapter
+
+        }
+        fetchArticles()
+
+        val queryTextListener = object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                newText?.let { searchQuery ->
+                    viewsModel.searchArticles(searchQuery)
+                }
+                return true
+            }
+        }
+
+        binding.searchView.setOnQueryTextListener(queryTextListener)
+
+
+        binding.swiperefresh.setOnRefreshListener {
+            fetchArticles()
+        }
+
+    }
 
 
 
-lifecycleScope.launch(IO){
-    val response = remoteApi.getNewsSuspend()
 
-    if (response.isSuccessful){
+    companion object {
+        const val INTENT_EXTRA_ARTICLE = "article"
+    }
 
-        binding.newsRecyclerView.adapter =
-            response.body()?.let {
-                NewsRecyclerAdapter(it.articles) { articleIndex ->
-                    val newsDetailIntent =
-                        Intent(
-                            this@MainActivity,
-                            NewsDetailActivity::class.java
-                        )
-                    newsDetailIntent.putExtra("article", response.body()!!.articles[articleIndex])
-                    startActivity(newsDetailIntent)
+    private fun fetchArticles() {
 
+        binding.swiperefresh.isRefreshing = true
 
+        viewsModel.articles.observe(this) { result ->
+
+            when(result) {
+                is CustomResult.Success -> {
+                    articleAdapter.updateArticle(result.value)
+                }
+                is CustomResult.Failure -> {
+                    Toast.makeText(this@MainActivity, "No Data Available", Toast.LENGTH_LONG).show()
                 }
             }
-    }
-}
 
-
-        networkStatusChecker.performIfConnectedToInternet {
-            remoteApi.getNews { articles, error ->
-               // binding.newsRecyclerView.run {   ///if you needed to do multiple things on the recycler view
-
-                    if (error != null) {
-                        println("My error is $error.message")
-                    } else {
-
-
-                                binding.newsRecyclerView.adapter =
-                                    NewsRecyclerAdapter(articles) { articleIndex ->
-                                        val newsDetailIntent =
-                                            Intent(
-                                                this@MainActivity,
-                                                NewsDetailActivity::class.java
-                                            )
-                                        newsDetailIntent.putExtra("article", articles[articleIndex])
-                                        startActivity(newsDetailIntent)
-
-
-                                    }
-
-
-
-                    }
-              //  }
-            }
         }
 
+        binding.swiperefresh.isRefreshing = false
 
     }
-
-    private fun fetchData(): String? {
-        for (value in authenticationHeaders.values) {
-            println(value)
-        }
-        return authenticationHeaders["API_KEY"]
-    }
-
 
 }
 

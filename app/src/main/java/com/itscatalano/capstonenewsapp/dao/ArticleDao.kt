@@ -18,4 +18,8 @@ interface ArticleDao {
 
     @Query("DELETE FROM articles")
     suspend fun deleteArticles()
+
+    @Query("SELECT * FROM articles WHERE title LIKE :search")
+    suspend fun searchArticles(search: String): List<Article>
+
 }

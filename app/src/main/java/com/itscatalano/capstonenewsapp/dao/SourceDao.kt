@@ -9,8 +9,13 @@ import com.itscatalano.capstonenewsapp.models.Source
 
 @Dao
 interface SourceDao {
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun addSource(source: Source)
+    suspend fun addSources(source: Source)
+
+    @Query("SELECT * FROM sources")
+    suspend fun getSources(): Source
+
 
     @Query("DELETE FROM sources")
     suspend fun deleteSources()

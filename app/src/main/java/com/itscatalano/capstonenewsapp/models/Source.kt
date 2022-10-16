@@ -1,14 +1,8 @@
 package com.itscatalano.capstonenewsapp.models
 
 import android.os.Parcelable
-import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import androidx.room.TypeConverters
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import com.itscatalano.capstonenewsapp.database.converters.CategoryConverter
-import com.itscatalano.capstonenewsapp.database.converters.SourceConverter
 import kotlinx.parcelize.Parcelize
 import java.util.*
 
