@@ -10,4 +10,5 @@
     <string name="downloadwifi">Download on wifi</string>
     <string name="switch_on">ON</string>
     <string name="switch_off">OFF</string>
+    <item name="custom_menu_items" type="id">custom_menu_items</item>
 </resources>
