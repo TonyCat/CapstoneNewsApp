@@ -7,6 +7,8 @@ import com.itscatalano.capstonenewsapp.App
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+
+
 class MainActivityViewModel : ViewModel() {
     class Factory : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -15,7 +17,7 @@ class MainActivityViewModel : ViewModel() {
     }
 
 
-/*
+/* this didn't work
     companion object {
 
         val Factory: ViewModelProvider.Factory = object : ViewModelProvider.Factory {

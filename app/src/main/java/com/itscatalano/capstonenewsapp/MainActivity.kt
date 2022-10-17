@@ -6,9 +6,11 @@ import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.widget.SwitchCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.itscatalano.capstonenewsapp.App.Companion.newsRepository
@@ -78,8 +80,10 @@ class MainActivity : AppCompatActivity() {
             adapter = articleAdapter
 
         }
+
         fetchArticles()
 
+/*
         val queryTextListener = object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return true
@@ -93,8 +97,9 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
+*/
+     //   binding.searchView.setOnQueryTextListener(queryTextListener)
 
-        binding.searchView.setOnQueryTextListener(queryTextListener)
 
 
         binding.swiperefresh.setOnRefreshListener {
@@ -104,6 +109,30 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        val switchItem = menu!!.findItem(R.id.custom_menu_items)
+        val switch = switchItem.actionView?.findViewById<SwitchCompat>(R.id.wifi_switch)
+        viewModel.isDownloadOverWifiOnly.observe(this) { isDownloadOverWifiOnly ->
+            if (switch != null) {
+                isDownloadOverWifiOnly.also { switch.isChecked = it }
+            }
+            if (isDownloadOverWifiOnly) {
+                if (switch != null) {
+                    switch.text = getString(R.string.switch_on, switchItem.title)
+                }
+            } else {
+                if (switch != null) {
+                    switch.text = getString(R.string.switch_off, switchItem.title)
+                }
+            }
+        }
+        switch?.setOnCheckedChangeListener { _, _ ->
+            viewModel.toggleDownloadOverWifiOnly()
+
+        }
+        return true
+    }
 
 
     companion object {
@@ -132,8 +161,6 @@ class MainActivity : AppCompatActivity() {
     }
 
 }
-
-
 
 
 
