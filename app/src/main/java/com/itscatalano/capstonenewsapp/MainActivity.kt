@@ -35,7 +35,7 @@ import kotlinx.coroutines.flow.onEach
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
-    private lateinit var newsRecyclerView: RecyclerView
+   // private lateinit var newsRecyclerView: RecyclerView
 
     private val viewModel: MainActivityViewModel by viewModels {
         MainActivityViewModel.Factory()
@@ -65,12 +65,6 @@ class MainActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        binding = ActivityMainBinding.inflate(layoutInflater)
-
-        setContentView(binding.root)
-
 
         super.onCreate(savedInstanceState)
 
