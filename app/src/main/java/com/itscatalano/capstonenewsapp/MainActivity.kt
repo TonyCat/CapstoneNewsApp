@@ -49,20 +49,6 @@ class MainActivity : AppCompatActivity() {
 //        )
 //    }
 
-    private val viewsModel by viewModels<NewsListViewModel> {
-        NewsListViewModel.Factory(
-            newsRepo = App.newsRepository
-        )
-    }
-
-    private val articleAdapter =
-        NewsRecyclerAdapter{ article ->
-            val newsDetailIntent = Intent(this@MainActivity, NewsDetailActivity::class.java)
-            newsDetailIntent.putExtra(INTENT_EXTRA_ARTICLE, article)
-            startActivity(newsDetailIntent)
-        }
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -75,7 +61,20 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        fetchArticles()
+        viewsModel.articles.observe(this) { result ->
+            when(result) {
+                is CustomResult.Success -> {
+                    articleAdapter.updateArticle(result.value)
+                }
+                is CustomResult.Failure -> {
+                    Toast.makeText(this@MainActivity, "No Data Available", Toast.LENGTH_LONG).show()
+                }
+            }
+       //     Toast.makeText(this@MainActivity, "Refresh true", Toast.LENGTH_LONG).show()
+            binding.swiperefresh.isRefreshing = false
+        }
+
+        //fetchArticles()
 
 /*
         val queryTextListener = object : SearchView.OnQueryTextListener {
@@ -92,15 +91,32 @@ class MainActivity : AppCompatActivity() {
 
         }
 */
-     //   binding.searchView.setOnQueryTextListener(queryTextListener)
+        //   binding.searchView.setOnQueryTextListener(queryTextListener)
 
 
 
-        binding.swiperefresh.setOnRefreshListener {
-            fetchArticles()
-        }
+//        binding.swiperefresh.setOnRefreshListener {
+//            fetchArticles()
+//        }
 
     }
+
+
+
+    private val viewsModel by viewModels<NewsListViewModel> {
+        NewsListViewModel.Factory(
+            newsRepo = App.newsRepository
+        )
+    }
+
+    private val articleAdapter =
+        NewsRecyclerAdapter{ article ->
+            val newsDetailIntent = Intent(this@MainActivity, NewsDetailActivity::class.java)
+            newsDetailIntent.putExtra(INTENT_EXTRA_ARTICLE, article)
+            startActivity(newsDetailIntent)
+        }
+
+
 
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -137,20 +153,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.swiperefresh.isRefreshing = true
 
-        viewsModel.articles.observe(this) { result ->
-
-            when(result) {
-                is CustomResult.Success -> {
-                    articleAdapter.updateArticle(result.value)
-                }
-                is CustomResult.Failure -> {
-                    Toast.makeText(this@MainActivity, "No Data Available", Toast.LENGTH_LONG).show()
-                }
-            }
-
-        }
-
-        binding.swiperefresh.isRefreshing = false
+     viewsModel.fetchArticles()
 
     }
 

@@ -37,7 +37,7 @@ class App : Application() {
         }
 
 
-        val gson = lazy{ Gson() }
+        val gson by lazy{ Gson() }
 
         val prefsDataStore by lazy { PreferencesDataStoreImpl(instance.dataStore) }
 

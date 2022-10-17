@@ -25,7 +25,10 @@ class NewsListViewModel(
     }
 
     init {
-        viewModelScope.launch(Dispatchers.IO) {
+        fetchArticles()
+    }
+    fun fetchArticles() {
+        viewModelScope.launch(IO) {
             newsRepo
                 .getArticles()
                 .onEach { newArticle ->
@@ -35,6 +38,23 @@ class NewsListViewModel(
                 .collect()
         }
     }
+
+
+//    init {
+//        viewModelScope.launch(Dispatchers.IO) {
+//            newsRepo
+//                .getArticles()
+//                .onEach { newArticle ->
+//
+//                    _articles.postValue(newArticle)
+//                    Log.d("ARTICLE", newArticle.toString())
+//
+//                    Log.d("ARTICLE", "This is hitting")
+//
+//                }
+//                .collect()
+//        }
+//    }
 
     fun searchArticles(search: String) {
         viewModelScope.launch(Dispatchers.IO) {

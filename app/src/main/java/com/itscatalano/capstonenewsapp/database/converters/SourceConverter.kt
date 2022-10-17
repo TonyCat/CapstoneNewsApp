@@ -10,12 +10,10 @@ class SourceConverter {
 
 
     @TypeConverter
-    fun toSource(json: String) =
-        Gson().fromJson(json, Source::class.java)
+    fun toSource(json: String) : Source = App.gson.fromJson(json, Source::class.java)
 
     @TypeConverter
-    fun fromSource(source: Source) =
-        Gson().toJson(source)
+    fun fromSource(source: Source): String = App.gson.toJson(source)
 //
 //    @TypeConverter
 //    fun fromListToString(value: List<Source>): String {
