@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
-import android.widget.SearchView
+import androidx.appcompat.widget.SearchView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.widget.SwitchCompat
@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
 
         //fetchArticles()
 
-/*
+
         val queryTextListener = object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return true
@@ -90,14 +90,14 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
-*/
-        //   binding.searchView.setOnQueryTextListener(queryTextListener)
+
+           binding.searchView.setOnQueryTextListener(queryTextListener)
 
 
 
-//        binding.swiperefresh.setOnRefreshListener {
-//            fetchArticles()
-//        }
+        binding.swiperefresh.setOnRefreshListener {
+            viewsModel.fetchArticles()
+        }
 
     }
 
@@ -148,14 +148,14 @@ class MainActivity : AppCompatActivity() {
     companion object {
         const val INTENT_EXTRA_ARTICLE = "article"
     }
-
+/*
     private fun fetchArticles() {
 
         binding.swiperefresh.isRefreshing = true
 
      viewsModel.fetchArticles()
 
-    }
+    }*/
 
 }
 
