@@ -1,6 +1,32 @@
 # CapstoneNewsApp
 # Anthony Catalano NYSOITS
 
+
+
+# Week 8
+Need to have
+- [x] Offline mode
+- [x] NewsDatabase implementation
+- [x] Article with @Entity and @PimaryKey on a new id property
+- [x] SourceDao with @Entity and @PrimaryKey on existing id property
+- [x] DAO for article and source entities with getArticles()/getSources(), addArticles()/addSources(), and clearArticles() methods.
+- [x] Article Search
+- [x] EditText and Button to search articles
+- [x] Repository and DAO methods to query the articles
+- [x] Download Only Over WiFi
+- [x] Create a Preference DataStore
+- [x] Feed in the datastore to the repository and fetch the key/value from the datastore. 
+This will determine whether or not you make a network call. If the value is “true” then the network call should be made only when on WiFi.
+- [x]Toggle menu icon in toolbar or ToggleButton/Checkbox on the main, list layout
+Nice to have
+- [x] Offline mode
+- [x] Relationships defined on Article and Source entities. One Source can have many Article so the relationship is one-to-many.
+- [x] Article Search
+- [x] Use SearchView or a more robust search UI - Used AndroidX Searchview!
+- [] Use a PeriodicWorkRequest to periodically fetch new article data from the NewsAPI.See optional section for more details
+
+
+
 # Week 7
  Need to have:
 - [x]  A Details screen that adds some sort of filter to the image
