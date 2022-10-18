@@ -1,5 +1,6 @@
 package com.itscatalano.capstonenewsapp
 
+import android.annotation.SuppressLint
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.itscatalano.capstonenewsapp.models.Article
@@ -7,11 +8,10 @@ import com.itscatalano.capstonenewsapp.views.NewsView
 import com.itscatalano.capstonenewsapp.views.NewsViewHolder
 
 class NewsRecyclerAdapter (
-    newsList : List<Article>,
-    private val onArticleTap: (Int) -> Unit
+    private val onArticleTap: (Article) -> Unit
 ) :RecyclerView.Adapter<NewsViewHolder>(){
 
-    private val news = newsList.toMutableList()
+    private var news = mutableListOf<Article>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
        val newsView = NewsView(parent.context)
@@ -30,7 +30,7 @@ class NewsRecyclerAdapter (
 
 
         holder.bindData(news[position]){
-            onArticleTap(position)
+            onArticleTap(news[position])
         }
 
 
@@ -40,5 +40,10 @@ class NewsRecyclerAdapter (
         return news.size
     }
 
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateArticle(newArticle: List<Article>) {
+        news = newArticle.toMutableList()
+        notifyDataSetChanged()
+    }
 
 }

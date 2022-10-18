@@ -1,10 +1,11 @@
 package com.itscatalano.capstonenewsapp.models
 
 import android.os.Parcelable
-import com.itscatalano.capstonenewsapp.models.CategoryType
-import com.itscatalano.capstonenewsapp.models.CountryType
-import com.itscatalano.capstonenewsapp.models.LanguageType
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
+import java.util.*
+
 
 /***
  * Author: Anthony Catalano
@@ -14,7 +15,17 @@ import kotlinx.parcelize.Parcelize
  *
  */
 @Parcelize
-data class Source(val id: String? = null, val name: String?, val description: String?, val url: String?, val category: CategoryType?, val language: LanguageType?, val country: CountryType?) :
-Parcelable
+@Entity(tableName="sources")
+data class Source(
+
+    val id: String? = null,
+    @PrimaryKey
+    val name: String,
+    val description: String? = null,
+    val url: String?  = null,
+    val category: CategoryType? = CategoryType.business,
+    val language: LanguageType? = LanguageType.all,
+    val country: CountryType? = CountryType.us):
+    Parcelable
 
 

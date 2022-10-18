@@ -18,3 +18,4 @@ fun buildRetrofit(): Retrofit {
 
 fun buildApiService(): RemoteApiService =
     buildRetrofit().create(RemoteApiService::class.java)
+

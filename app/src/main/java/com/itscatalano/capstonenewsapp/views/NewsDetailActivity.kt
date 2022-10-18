@@ -36,6 +36,10 @@ class NewsDetailActivity : AppCompatActivity() {
 
         if (article != null) {
 
+            println("Article is $article")
+
+            binding.txtTitle.text = article.title
+            binding.txtAuthor.text = article.author
             binding.txtDescription.text = article.description
         }
 

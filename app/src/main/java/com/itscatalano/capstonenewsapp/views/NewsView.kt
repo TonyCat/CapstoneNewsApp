@@ -8,6 +8,7 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.bumptech.glide.Glide
 import com.itscatalano.capstonenewsapp.databinding.NewsServiceLayoutBinding
 import com.itscatalano.capstonenewsapp.models.Article
 import kotlinx.coroutines.Dispatchers
@@ -32,27 +33,28 @@ class NewsView @JvmOverloads constructor (
                 binding.titleTextView.text = article.title
                 binding.authorTextView.text = article.author
 
+                Glide.with(context).load(article.urlToImage).into(binding.newsImage)
 
 //get the images on their own thread
                 Log.d("TaskThread", Thread.currentThread().name)
-                GlobalScope.launch(context = Dispatchers.IO) {
-                    Log.d("TaskThread", Thread.currentThread().name)
-                    val imageURL =  URL(article.urlToImage)
-                    val connection = imageURL.openConnection() as HttpURLConnection
-                    connection.doInput = true
-                    connection.connect()
-
-                    val inputStream = connection.inputStream
-                    val bitmap = BitmapFactory.decodeStream(inputStream)
-
-                    launch (Dispatchers.Main){
-                        Log.d("TaskThread", Thread.currentThread().name)
-                        binding.newsImage.setImageBitmap(bitmap)
-                    }
-
-
-
-                }
+//                GlobalScope.launch(context = Dispatchers.IO) {
+//                    Log.d("TaskThread", Thread.currentThread().name)
+//                    val imageURL =  URL(article.urlToImage)
+//                    val connection = imageURL.openConnection() as HttpURLConnection
+//                    connection.doInput = true
+//                    connection.connect()
+//
+//                    val inputStream = connection.inputStream
+//                    val bitmap = BitmapFactory.decodeStream(inputStream)
+//
+//                    launch (Dispatchers.Main){
+//                        Log.d("TaskThread", Thread.currentThread().name)
+//                        binding.newsImage.setImageBitmap(bitmap)
+//                    }
+//
+//
+//
+//                }
 
 
 
