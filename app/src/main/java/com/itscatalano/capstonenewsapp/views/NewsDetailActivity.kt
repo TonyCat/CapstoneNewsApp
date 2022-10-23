@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.AttributeSet
+import android.util.Log
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
@@ -22,6 +23,7 @@ import kotlinx.coroutines.withContext
 class NewsDetailActivity : AppCompatActivity() {
 
    private lateinit var  binding : ActivityNewsDetailBinding
+    private val TAG = this.javaClass.simpleName
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,7 +88,7 @@ class NewsDetailActivity : AppCompatActivity() {
                 if (!imagePath.isNullOrEmpty()) {
                     displayImage(imagePath)
                 }else{
-                    println("*****The image path is empty")
+                     Log.e(TAG,"The image path is empty")
                 }
             }
         })
@@ -101,7 +103,7 @@ lifecycleScope.launch(Dispatchers.Main){
             val bitmap = loadImageFromFile(imagePath)
 
 
-            println("bitmap path is $imagePath")
+            Log.d(TAG,"bitmap path is $imagePath")
 
             binding.detailImage.setImageBitmap(bitmap)
        }
