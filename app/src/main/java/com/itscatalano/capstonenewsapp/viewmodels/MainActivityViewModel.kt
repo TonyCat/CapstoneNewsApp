@@ -6,7 +6,7 @@ import androidx.lifecycle.viewmodel.CreationExtras
 import com.itscatalano.capstonenewsapp.App
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-
+import dagger.hilt.android.lifecycle.HiltViewModel
 
 
 class MainActivityViewModel : ViewModel() {

@@ -12,10 +12,14 @@ import com.itscatalano.capstonenewsapp.networking.buildApiService
 import com.itscatalano.capstonenewsapp.repo.ArticleRepo
 import com.itscatalano.capstonenewsapp.repo.ArticleRepoImpl
 import com.itscatalano.capstonenewsapp.repo.PreferencesDataStoreImpl
+import dagger.hilt.android.HiltAndroidApp
+
+
 
 private const val KEY_PREFERENCES = "taskie_preferences"
 private const val KEY_TOKEN = "token"
 
+@HiltAndroidApp
 class App : Application() {
     val dataStore by preferencesDataStore(name = "preferences")
 

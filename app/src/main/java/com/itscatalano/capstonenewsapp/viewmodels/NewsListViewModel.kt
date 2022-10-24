@@ -10,7 +10,7 @@ import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-
+import dagger.hilt.android.lifecycle.HiltViewModel
 
 class NewsListViewModel(
     private val newsRepo: ArticleRepo
